@@ -1,0 +1,35 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/* # get all the files in this folder
+      - ./infra/k8s-dev/*
+build:
+  local:
+    push: false # whenever we build an image, do not push up to docker hub
+  artifacts:
+    - image: brandonshearin/tickets-auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: brandonshearin/tickets-client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: '/**/*.js'
+            dest: .
+    - image: brandonshearin/tickets-tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: '/**/*.ts'
+            dest: .
