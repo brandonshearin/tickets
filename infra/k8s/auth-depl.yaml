@@ -17,7 +17,7 @@ spec:
           image: brandonshearin/tickets-auth
           env:
             - name: MONGO_URI
-              value: mongodb://tickets-mongo-srv:27017/tickets # there can be multiple db's inside a monogodb instance
+              value: 'mongodb://auth-mongo-srv:27017/auth' # there can be multiple db's inside a monogodb instance
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
