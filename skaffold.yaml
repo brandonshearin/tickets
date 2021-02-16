@@ -34,7 +34,7 @@ build:
           - src: '/**/*.ts'
             dest: .
     - image: brandonshearin/tickets-orders
-      context: tickets
+      context: orders
       docker:
         dockerfile: Dockerfile
       sync: 
